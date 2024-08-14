@@ -145,7 +145,7 @@ def get_raw(raw, target_height, target_width, save_path):
     return bayer_pattern
 
 
-def save_params(raw, bayer_pattern, path):
+def save_params(raw, bayer_pattern, height, width, path):
 
     params = {}
     params['common'] = {}
@@ -154,6 +154,8 @@ def save_params(raw, bayer_pattern, path):
 
     params['common']['bayer_pattern'] = bayer_pattern
     params['common']['white_level'] = raw.camera_white_level_per_channel
+    params['common']['img_height'] = height
+    params['common']['img_width'] = width
 
     params['blc']['black_level'] = raw.black_level_per_channel
 
@@ -179,7 +181,7 @@ def save_raw(dir_path, target_height, target_width, tag):
 
         raw = rawpy.imread(raw_path)
         pattern = get_raw(raw, target_height, target_width, save_path)
-        save_params(raw, pattern, param_path)
+        save_params(raw, pattern, target_height, target_width, param_path)
 
 
 if __name__ == '__main__':
