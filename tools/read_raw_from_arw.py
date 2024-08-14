@@ -8,6 +8,7 @@ import numpy as np
 import rawpy
 import os
 import json
+import matplotlib.pyplot as plt
 
 
 def read_files_name(path=None, tag=None):
@@ -119,8 +120,9 @@ def get_raw(raw, target_height, target_width, save_path):
 
     raw_img = np.array(raw_img)
 
-    raw_img = raw_img.T
-    raw_img = raw_img[::-1]
+    if raw.sizes.flip != 0:
+        raw_img = raw_img.T
+        raw_img = raw_img[::-1]
 
     height, width = raw_img.shape
 
@@ -182,8 +184,8 @@ def save_raw(dir_path, target_height, target_width, tag):
 
 if __name__ == '__main__':
 
-    target_height = 3024
-    target_width = 4032
+    target_height = 1080
+    target_width = 1920
 
     path = '../test_image/RAW/Sony_A74'
     tag = 'ARW'
