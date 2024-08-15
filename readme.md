@@ -1,1 +1,1 @@
-a personal image processting platform
+a personal image processing platform
