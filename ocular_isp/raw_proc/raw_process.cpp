@@ -1,13 +1,26 @@
 #include"edge_filters.h"
 #include"common.h"
+#include"raw_params.h"
 
 #include<iostream>
+#include<string>
 
 
+using namespace std;
 
 
-void raw_proc(int16_t* src, int32_t height, int32_t width, int16_t* dst)
+void raw_proc(int16_t* src, string params_path,  int32_t height, int32_t width, int16_t* dst)
 {
+	// get params
+
+	COMMON_PARAMS* common_params = (COMMON_PARAMS*)malloc(sizeof(COMMON_PARAMS));
+	BLC_PARAMS* blc_params = (BLC_PARAMS*)malloc(sizeof(BLC_PARAMS));
+	AWB_PARAMS* awb_params = (AWB_PARAMS*)malloc(sizeof(AWB_PARAMS));
+
+	read_params(params_path, common_params, blc_params, awb_params);
+
+	// raw domain processing
+	printf("1\n");
 
 }
 

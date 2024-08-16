@@ -2,6 +2,7 @@
 #include<iostream>
 #include<stdio.h>
 #include<stdlib.h>
+#include<string>
 
 #include"raw_proc/raw_process.h"
 
@@ -14,6 +15,9 @@ void main()
 	int height = 1080;
 	int width = 1920;
 
+	string param_path = "G:/ISP/ocular/test_image/RAW/Sony_A74/DSC03767.json";
+
+
 	FILE* fp = NULL;
 	fp = fopen("G:/ISP/ocular/test_image/RAW/Sony_A74/DSC03767_1920x1080.raw", "rb+");
 	int16_t* data = new int16_t[height * width];
@@ -23,7 +27,11 @@ void main()
 	int16_t* test_res = new int16_t[height * width];
 	memset(test_res, 0, width * height * sizeof(int16_t));
 
+	int16_t* raw_res = new int16_t[height * width];
+	memset(raw_res, 0, width * height * sizeof(int16_t));
+
 	test_function(data, height, width, test_res);
+	raw_proc(data, param_path, height, width, raw_res);
 
 	Mat img;
 	Mat test_out;

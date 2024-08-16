@@ -1,1 +1,1 @@
-{"common": {"bayer_pattern": "RGGB", "white_level": [15360, 15360, 15360, 15360], "img_height": 1080, "img_width": 1920}, "blc": {"black_level": [512, 512, 512, 512]}, "awb": {"gain": [2783.0, 1024.0, 1598.0, 1024.0]}}
+{"common": {"bayer_pattern": 0, "white_level": 15360, "img_height": 1080, "img_width": 1920}, "blc": {"black_level": [512, 512, 512, 512]}, "awb": {"gain": [2783.0, 1024.0, 1598.0, 1024.0]}}

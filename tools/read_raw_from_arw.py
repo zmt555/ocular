@@ -92,6 +92,15 @@ def pattern_mapping(pattern, left, top):
     else:
         print("Wrong bayer pattern")
 
+    if cropped_pattern == 'RGGB':
+        cropped_pattern = 0
+    elif cropped_pattern == 'GRBG':
+        cropped_pattern = 1
+    elif cropped_pattern == 'GBRG':
+        cropped_pattern = 2
+    elif cropped_pattern == 'BGGR':
+        cropped_pattern = 3
+
     return cropped_pattern
 
 
@@ -153,7 +162,7 @@ def save_params(raw, bayer_pattern, height, width, path):
     params['awb'] = {}
 
     params['common']['bayer_pattern'] = bayer_pattern
-    params['common']['white_level'] = raw.camera_white_level_per_channel
+    params['common']['white_level'] = raw.camera_white_level_per_channel[0]
     params['common']['img_height'] = height
     params['common']['img_width'] = width
 
