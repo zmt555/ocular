@@ -29,3 +29,20 @@ void bayer_to_gray(int16_t* src, int32_t height, int32_t width, int16_t* dst)
 	conv2d(src, height, width, kernel_1, 3, 4, dst);
 
 }
+
+
+
+void bypass_operator(int16_t* src, int32_t height, int32_t width, int16_t* dst)
+{
+	int i, j;
+
+	for (i = 0; i < height; i++)
+	{
+		for (j = 0; j < width; j++)
+		{
+			*dst = src[i * width + j];
+			dst++;
+		}
+	}
+
+}

@@ -2,6 +2,10 @@
 #include"common.h"
 #include<iostream>
 
+#include"dpc.h"
+#include"raw_nr.h"
+
+
 using namespace std;
 
 

@@ -1,12 +1,42 @@
 #include"edge_filters.h"
 #include"common.h"
 #include"raw_params.h"
+#include"raw_process.h"
 
 #include<iostream>
 #include<string>
 
 
 using namespace std;
+
+
+
+void run_process(int16_t* src, int32_t height, int32_t width, COMMON_PARAMS* common_params, BLC_PARAMS* blc_params, AWB_PARAMS *awb_params, int16_t* dst)
+{
+	int i, j;
+
+	int16_t* raw_temp = new int16_t[height * width];
+
+	// raw process
+	// dpc
+	run_dpc(src, height, width, dst);
+	// raw nr
+
+	// blc
+
+	// lsc
+
+	// wbc
+
+	// tone mapping
+
+	// cac
+
+	// demosaicing
+
+	delete[] raw_temp;
+
+}
 
 
 void raw_proc(int16_t* src, string params_path,  int32_t height, int32_t width, int16_t* dst)
@@ -20,7 +50,7 @@ void raw_proc(int16_t* src, string params_path,  int32_t height, int32_t width, 
 	read_params(params_path, common_params, blc_params, awb_params);
 
 	// raw domain processing
-	printf("1\n");
+	run_process(src, height, width, common_params, blc_params, awb_params, dst);
 
 }
 
