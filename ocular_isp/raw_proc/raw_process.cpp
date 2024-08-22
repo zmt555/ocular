@@ -26,7 +26,7 @@ void run_process(uint16_t* src, int32_t height, int32_t width, COMMON_PARAMS* co
 	run_rawnr(raw_temp, height, width, raw_temp);
 
 	// blc
-	run_blc(raw_temp, height, width, raw_temp);
+	run_blc(raw_temp, height, width, blc_params, common_params, raw_temp);
 
 	// lsc
 	run_lsc(raw_temp, height, width, raw_temp);

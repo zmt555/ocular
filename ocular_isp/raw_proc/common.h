@@ -1,7 +1,7 @@
 #pragma once
 
 #include<iostream>
-
+#include"raw_params.h"
 
 
 typedef enum tag_bayer_pattern
