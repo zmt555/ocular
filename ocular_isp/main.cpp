@@ -20,6 +20,7 @@ void main()
 
 	FILE* fp = NULL;
 	fp = fopen("G:/ISP/ocular/test_image/RAW/Sony_A74/DSC03767_1920x1080.raw", "rb+");
+	string save_path = "G:/ISP/ocular/dst/DSC03767_ocular_out.jpg";
 
 	uint16_t* data = new uint16_t[height * width];
 	memset(data, 0, width * height * sizeof(uint16_t));
@@ -47,6 +48,7 @@ void main()
 	memcpy(raw_domain.data, raw_res, 3 * bufLen * sizeof(uint8_t));
 	//memcpy(test_out.data, test_res, bufLen * sizeof(int16_t));
 
+	imwrite(save_path, raw_domain);
 
 	//namedWindow("img", 0);
 	//imshow("img", img);

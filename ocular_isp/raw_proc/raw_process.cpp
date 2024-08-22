@@ -32,7 +32,7 @@ void run_process(uint16_t* src, int32_t height, int32_t width, COMMON_PARAMS* co
 	run_lsc(raw_temp, height, width, raw_temp);
 
 	// wbc
-	run_wbc(raw_temp, height, width, raw_temp);
+	run_wbc(raw_temp, height, width, awb_params, common_params, raw_temp);
 
 	// tone mapping
 	run_gtm(raw_temp, height, width, raw_temp);

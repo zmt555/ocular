@@ -9,6 +9,7 @@ import rawpy
 import os
 import json
 import matplotlib.pyplot as plt
+import cv2 as cv
 
 
 def read_files_name(path=None, tag=None):
@@ -193,12 +194,47 @@ def save_raw(dir_path, target_height, target_width, tag):
         save_params(raw, pattern, target_height, target_width, param_path)
 
 
+def get_jpg(jpg, target_height, target_width, save_path):
+
+    half_target_height = target_height >> 1
+    half_target_width = target_width >> 1
+
+    height, width = jpg.shape[0], jpg.shape[1]
+
+    center_x = width >> 1
+    center_y = height >> 1
+
+    left_x = center_x - half_target_width
+    right_x = center_x + half_target_width
+
+    top_y = center_y - half_target_height
+    bottom_y = center_y + half_target_height
+
+    target_area = jpg[top_y:bottom_y, left_x:right_x, :]
+
+    cv.imwrite(save_path, target_area)
+
+
+def save_cropped_jpg(dir_path, target_height, target_width, tag):
+
+    files_name = read_files_name(dir_path, tag)
+
+    for name in files_name:
+
+        jpg_path = dir_path + '/' + name
+        save_path = dir_path + '/' + name[:-(len(tag) + 1)] + '_' + str(target_width) + 'x' + str(target_height) + '.jpg'
+
+        jpg = cv.imread(jpg_path)
+        get_jpg(jpg, target_height, target_width, save_path)
+
+
 if __name__ == '__main__':
 
     target_height = 1080
     target_width = 1920
 
-    path = '../test_image/RAW/Sony_A74'
-    tag = 'ARW'
+    raw_path = '../test_image/RAW/Sony_A74'
+    rgb_path = '../test_image/RGB/Sony_A74'
 
-    save_raw(path, target_height, target_width, tag)
+    save_raw(raw_path, target_height, target_width, "ARW")
+    save_cropped_jpg(rgb_path, target_height, target_width, "JPG")
