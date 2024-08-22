@@ -21,16 +21,16 @@ void main()
 	FILE* fp = NULL;
 	fp = fopen("G:/ISP/ocular/test_image/RAW/Sony_A74/DSC03767_1920x1080.raw", "rb+");
 
-	int16_t* data = new int16_t[height * width];
-	memset(data, 0, width * height * sizeof(int16_t));
-	fread(data, sizeof(int16_t), width * height, fp);
+	uint16_t* data = new uint16_t[height * width];
+	memset(data, 0, width * height * sizeof(uint16_t));
+	fread(data, sizeof(uint16_t), width * height, fp);
 
 	//int16_t* test_res = new int16_t[height * width];
 	//memset(test_res, 0, width * height * sizeof(int16_t));
 	//test_function(data, height, width, test_res);
 
-	int16_t* raw_res = new int16_t[height * width];
-	memset(raw_res, 0, width * height * sizeof(int16_t));
+	uint8_t* raw_res = new uint8_t[3 * height * width];
+	memset(raw_res, 0, 3 * width * height * sizeof(uint8_t));
 
 	raw_proc(data, param_path, height, width, raw_res);
 
@@ -39,12 +39,12 @@ void main()
 	//Mat test_out;
 	int bufLen = width * height;
 	
-	img.create(height, width, CV_16SC1);
-	raw_domain.create(height, width, CV_16SC1);
+	img.create(height, width, CV_16UC1);
+	raw_domain.create(height, width, CV_8UC3);
 	//test_out.create(height, width, CV_16SC1);
 
-	memcpy(img.data, data, bufLen * sizeof(int16_t));
-	memcpy(raw_domain.data, raw_res, bufLen * sizeof(int16_t));
+	memcpy(img.data, data, bufLen * sizeof(uint16_t));
+	memcpy(raw_domain.data, raw_res, 3 * bufLen * sizeof(uint8_t));
 	//memcpy(test_out.data, test_res, bufLen * sizeof(int16_t));
 
 
@@ -53,6 +53,7 @@ void main()
 
 	namedWindow("raw_out", WINDOW_FREERATIO);
 	// imshow("test_out", test_out);
+	// imshow("raw_out", img);
 	imshow("raw_out", raw_domain);
 
 	waitKey(0);

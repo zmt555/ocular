@@ -1,6 +1,22 @@
 #include<iostream>
 
+#include"common.h"
 #include"conv.h"
+
+
+static const RAW_PIXEL_TYPE raw_pixel_type_lut[4][4] =
+{
+	{R, Gr, Gb, B},
+	{Gr, R, B, Gb},
+	{Gb, B, R, Gr},
+	{B, Gb, Gr, R}
+};
+
+RAW_PIXEL_TYPE get_raw_pixel_type(const BAYER_PATTERN pattern, const int s32x, const int s32y)
+{
+	int i = ((s32y & 1) << 1) + (s32x & 1);
+	return raw_pixel_type_lut[pattern][i];
+}
 
 
 void bayer_to_gray(int16_t* src, int32_t height, int32_t width, int16_t* dst)
@@ -32,7 +48,7 @@ void bayer_to_gray(int16_t* src, int32_t height, int32_t width, int16_t* dst)
 
 
 
-void bypass_operator(int16_t* src, int32_t height, int32_t width, int16_t* dst)
+void bypass_operator(uint16_t* src, int32_t height, int32_t width, uint16_t* dst)
 {
 	int i, j;
 
@@ -46,3 +62,4 @@ void bypass_operator(int16_t* src, int32_t height, int32_t width, int16_t* dst)
 	}
 
 }
+
