@@ -20,7 +20,7 @@ void run_process(uint16_t* src, int32_t height, int32_t width, COMMON_PARAMS* co
 
 	// raw process
 	// dpc
-	run_dpc(src, height, width, raw_temp);
+	run_dpc(src, height, width, common_params, raw_temp);
 
 	// raw nr
 	run_rawnr(raw_temp, height, width, raw_temp);

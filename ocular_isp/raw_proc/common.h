@@ -44,6 +44,9 @@ void bayer_to_gray(int16_t* src, int32_t height, int32_t width, int16_t* dst);
 
 void bypass_operator(uint16_t* src, int32_t height, int32_t width, uint16_t* dst);
 
+void get_patch(uint16_t* src, int y, int x, int32_t height, int32_t width, int patchsize, int stride, uint16_t* dst);
 
+void get_patch(double* src, int y, int x, int32_t height, int32_t width, int patchsize, int stride, double* dst);
 
+void bubble_sort(uint16_t* src, int nums);
 

@@ -20,7 +20,7 @@ void main()
 
 	FILE* fp = NULL;
 	fp = fopen("G:/ISP/ocular/test_image/RAW/Sony_A74/DSC03767_1920x1080.raw", "rb+");
-	string save_path = "G:/ISP/ocular/dst/DSC03767_ocular_out.jpg";
+	string save_path = "G:/ISP/ocular/dst/DSC03767_ocular_out_dpc.jpg";
 
 	uint16_t* data = new uint16_t[height * width];
 	memset(data, 0, width * height * sizeof(uint16_t));

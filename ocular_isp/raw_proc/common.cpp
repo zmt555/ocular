@@ -47,7 +47,6 @@ void bayer_to_gray(int16_t* src, int32_t height, int32_t width, int16_t* dst)
 }
 
 
-
 void bypass_operator(uint16_t* src, int32_t height, int32_t width, uint16_t* dst)
 {
 	int i, j;
@@ -63,3 +62,84 @@ void bypass_operator(uint16_t* src, int32_t height, int32_t width, uint16_t* dst
 
 }
 
+
+int mirror(int a, int b, int c)
+{
+	a = (a > b) ? a : (b - a);
+	a = (a < c) ? a : (c - (a - c));
+
+	return a;
+}
+
+
+
+void get_patch(uint16_t* src, int y, int x, int32_t height, int32_t width, int patchsize, int stride, uint16_t* dst)
+{
+	int i, j;
+	int ii, jj;
+
+	int half_size = patchsize >> 1;
+
+	for (i = -half_size; i <= half_size; i++)
+	{
+		for (j = -half_size; j <= half_size; j++)
+		{
+			ii = y + i * stride;
+			ii = mirror(ii, 0, height - 1);
+
+			jj = x + j * stride;
+			jj = mirror(jj, 0, width - 1);
+
+			*dst = src[ii * width + jj];
+			dst++;
+		}
+	}
+}
+
+
+void get_patch(double* src, int y, int x, int32_t height, int32_t width, int patchsize, int stride, double* dst)
+{
+	int i, j;
+	int ii, jj;
+
+	int half_size = patchsize >> 1;
+
+	for (i = -half_size; i <= half_size; i++)
+	{
+		for (j = -half_size; j <= half_size; j++)
+		{
+			ii = y + i * stride;
+			ii = mirror(ii, 0, height - 1);
+
+			jj = x + j * stride;
+			jj = mirror(jj, 0, width - 1);
+
+			*dst = src[ii * width + jj];
+			dst++;
+		}
+	}
+}
+
+
+void swap(uint16_t* src, int i, int j)
+{
+	uint16_t temp = src[i];
+	src[i] = src[j];
+	src[j] = temp;
+}
+
+
+void bubble_sort(uint16_t* src, int nums)
+{
+	int i, j;
+	for (i = 0; i < nums - 1; i++)
+	{
+		for (j = i + 1; j <= nums; j++)
+		{
+			if (src[i] > src[j])
+			{
+				swap(src, i, j);
+			}
+		}
+	}
+}
